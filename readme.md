@@ -61,9 +61,11 @@ You should be able to load this from you windows host by browsing to http://10.1
 
 ## Mount a drive to the VM to edit files there
 
-Unfortunately the default Vagrant drive mapping in windows will not work, if you try to store your meteor files in C:\vagrant\meteor and run this, the MongoDB that gets stored along side.  You could use Samba, or run Mongo Separately, but I find the SFTP drive mapping to be fine, so I use the Eldos SFTP Net Drive free version http://www.eldos.com/sftp-net-drive/download-release.php. 
+Unfortunately the default Vagrant drive mapping in windows will not work, if you try to store your meteor files in C:\vagrant\meteor and run this, the MongoDB that gets stored along with the app, and Mongo doesn't like to be run with the way the VirtualBox file shares work.  You could use Samba, or run Mongo Separately, but I find the SFTP drive mapping to be fine, so I use the Eldos SFTP Net Drive free version http://www.eldos.com/sftp-net-drive/download-release.php. 
 
-Once I installed SFTP Net Drive, I just used IP 10.11.12.13, port 22, username vagrant, Key Based and pointed to the Puttygen created ppk key, and chose a drive letter (I did V for Vagrant).  This defaults to the home directory, which works for meteor if you run it from ~.  This should give you a mounted Drive to windows from which you can edit files from windows tools, and they should live reload to meteor.
+Once I installed SFTP Net Drive, I just used IP 10.11.12.13, port 22, username: vagrant, Key Based and pointed to the Puttygen created ppk key, and chose a drive letter (I did V for Vagrant).  This defaults to the home directory, which works for meteor if you run it from ~.  This should give you a mounted Drive to windows from which you can edit files from windows tools, and they should live reload to meteor.
+
+## Suspend Vagrant
 
 To suspend and resume the vagrant box, use `vagrant suspend` and `vagrant resume`.
 

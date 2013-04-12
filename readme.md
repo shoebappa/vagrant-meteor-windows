@@ -24,23 +24,23 @@ vagrant plugin install berkshelf-vagrant
 
 ## Place this repo's files
 
-Place the files here in a folder under wherever you want to keep your Vagrant configs, such as C:\vagrant\meteor
+Place the files here in a folder under wherever you want to keep your Vagrant configs, such as `C:\vagrant\meteor`
 
 ## Provision the VM
 
-From your a command prompt at your equivelant C:\vagrant\meteor\ run:
+From your command prompt at `C:\vagrant\meteor\` run:
 
 ```
 vagrant up
 ```
 
-This will download a virtualbox image (~280MB), and then run the provisioning to configure a host based IP: 10.11.12.13.
+This will download a virtualbox image (~280MB), and then run the provisioning to configure a private network IP: 10.11.12.13.  I find this easier to work with than Vagrant Port Forwarding.
 
 ## Create an SSH Key to connect to the VM
 
-Use PuttyGen http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html to convert the Vagrant SSH Key to a Putty style ppk that can be used by Putty, WinSCP, and Eldos SFTP Net Drive.  Once you have puttygen (might as well get Putty to if you don't have it), load the Vagrant key found under C:\Users\Your Username\.vagrant.d\insecure_private_key, then save it back out (I didn't use a password to encrypt it because I don't really know what I'm doing and didn't want to have to login).
+Download Putty and PuttyGen from http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html to SSH into the VM and to convert the Vagrant SSH Key to a Putty style ppk that can be used by Putty, WinSCP, and Eldos SFTP Net Drive.  Once you have puttygen, load the Vagrant key found under C:\Users\Your Username\.vagrant.d\insecure_private_key, then save it back out (I didn't use a password for the key, but perhaps there is a reason to).
 
-(Optionally) Configure Putty, Open Putty, use IP 10.11.12.13 and port 22, Click "Connection > Data" in the tree and put Auto-login username "vagrant", then go to "SSH > Auth" and Browse in the "Private key file" to the ppk you generated with Puttygen.  Now Go back to the main screen by clicking "Session" in the Tree, and type a relevant name in the "Saved Sessions" such as "Vagrant Meteor" and click save.  This will save the IP Address, Login Name and Key location for the next time you run Putty and you can just click the saved session.  Running this should give a SSH Terminal to the Vagrant Virtualize Linux box.
+Open Putty, use IP 10.11.12.13 and port 22, Click "Connection > Data" in the tree and put Auto-login username "vagrant", then go to "SSH > Auth" and Browse in the "Private key file" to the ppk you generated with Puttygen.  Now Go back to the main screen by clicking "Session" in the Tree, and type a relevant name in the "Saved Sessions" such as "Vagrant Meteor" and click save.  This will save the IP Address, Login Name and Key location for the next time you run Putty and you can just click the saved session.  Running this should give a SSH Terminal to the Vagrant Virtualize Linux box.
 
 ## Install Meteor to the VM
 

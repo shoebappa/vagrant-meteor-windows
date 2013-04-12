@@ -1,0 +1,5 @@
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'nodejs'
+cookbook 'git'
+cookbook 'curl'

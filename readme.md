@@ -38,9 +38,9 @@ This will download a virtualbox image (~280MB), and then run the provisioning to
 
 ## Create an SSH Key to connect to the VM
 
-Download Putty and PuttyGen from http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html to SSH into the VM and to convert the Vagrant SSH Key to a Putty style ppk that can be used by Putty, WinSCP, and Eldos SFTP Net Drive.  Once you have puttygen, load the Vagrant key found under C:\Users\Your Username\.vagrant.d\insecure_private_key, then save it back out (I didn't use a password for the key, but perhaps there is a reason to).
+Download Putty and PuttyGen from http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html to SSH into the VM and to convert the Vagrant SSH Key to a Putty style ppk that can be used by Putty, WinSCP, and Eldos SFTP Net Drive.  Once you have puttygen, load the Vagrant key found under `C:\Users\[Your Username]\.vagrant.d\insecure_private_key`, then save it back out (I didn't use a password for the key, but perhaps there is a reason to).
 
-Open Putty, use IP 10.11.12.13 and port 22, Click "Connection > Data" in the tree and put Auto-login username "vagrant", then go to "SSH > Auth" and Browse in the "Private key file" to the ppk you generated with Puttygen.  Now Go back to the main screen by clicking "Session" in the Tree, and type a relevant name in the "Saved Sessions" such as "Vagrant Meteor" and click save.  This will save the IP Address, Login Name and Key location for the next time you run Putty and you can just click the saved session.  Running this should give a SSH Terminal to the Vagrant Virtualize Linux box.
+Open Putty, use IP `10.11.12.13` and port `22`, Click "Connection > Data" in the tree and put Auto-login username "vagrant", then go to "SSH > Auth" and Browse in the "Private key file" to the ppk you generated with Puttygen.  Now Go back to the main screen by clicking "Session" in the Tree, and type a relevant name in the "Saved Sessions" such as "Vagrant Meteor" and click save.  This will save the IP Address, Login Name and Key location for the next time you run Putty and you can just click the saved session.  Running this should give you a SSH Terminal to the Vagrant virtualized Linux box.
 
 ## Install Meteor to the VM
 
@@ -57,13 +57,13 @@ meteor create ~/my_cool_app
 cd ~/my_cool_app
 meteor
 ```
-You should be able to load this from you windows host by browsing to http://10.11.12.13:3000/
+You should be able to load this from you windows host by browsing to `http://10.11.12.13:3000/`
 
 ## Mount a drive to the VM to edit files there
 
-Unfortunately the default Vagrant drive mapping in windows will not work, if you try to store your meteor files in C:\vagrant\meteor and run this, the MongoDB that gets stored along with the app, and Mongo doesn't like to be run with the way the VirtualBox file shares work.  You could use Samba, or run Mongo Separately, but I find the SFTP drive mapping to be fine, so I use the Eldos SFTP Net Drive free version http://www.eldos.com/sftp-net-drive/download-release.php. 
+Unfortunately the default Vagrant drive mapping in windows will not work, if you try to store your meteor files in `C:\vagrant\meteor` and run this, the MongoDB that gets stored along with the app, and Mongo doesn't like to be run with the way the VirtualBox file shares work.  You could use Samba, or run Mongo Separately, but I find the SFTP drive mapping to be fine, so I use the Eldos SFTP Net Drive free version http://www.eldos.com/sftp-net-drive/download-release.php. 
 
-Once I installed SFTP Net Drive, I just used IP 10.11.12.13, port 22, username: vagrant, Key Based and pointed to the Puttygen created ppk key, and chose a drive letter (I did V for Vagrant).  This defaults to the home directory, which works for meteor if you run it from ~.  This should give you a mounted Drive to windows from which you can edit files from windows tools, and they should live reload to meteor.
+Once I installed SFTP Net Drive, I just used IP `10.11.12.13`, port `22`, username: vagrant, Key Based and pointed to the Puttygen created ppk key, and chose a drive letter (I did V for Vagrant).  This defaults to the home directory, which works for meteor if you run it from ~.  This should give you a mounted Drive to windows from which you can edit files from windows tools, and they should live reload to meteor.
 
 ## Suspend Vagrant
 

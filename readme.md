@@ -19,7 +19,7 @@ http://downloads.vagrantup.com/
 Berkshelf http://berkshelf.com/ is awesome, and makes the Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  From a command prompt run:
 
 ```
-vagrant plugin install berkshelf-vagrant
+vagrant plugin install vagrant-berkshelf
 ```
 
 ## Place this repo's files

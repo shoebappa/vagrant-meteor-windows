@@ -1,5 +1,1 @@
-cookbook 'apt'
-cookbook 'build-essential'
-cookbook 'nodejs'
-cookbook 'git'
-cookbook 'curl'
+cookbook 'meteor_windows', path: "./cookbooks/meteor_windows"

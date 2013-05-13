@@ -3,28 +3,34 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "precise32"
+  config.vm.box = "opscode32"
 
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  # This Opscode box is used because the default Vagrant boxes come with an older version of chef, which the nodejs package option don't work with.
+  # To use another box, you will need to remove the nodejs install_method from the chef.json which will use the default method of source, which takes a while
+  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_chef-11.4.4.box"
 
   config.vm.network  :private_network, ip: "10.11.12.13"
 
   config.berkshelf.enabled = true
 
+  # This VM config option is required in order to be able to create the mount --bind symlink to the sync folder
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
+  end
+
   config.vm.provision :chef_solo do |chef|
 
-    chef.add_recipe "git"
-    chef.add_recipe "nodejs"
-    chef.add_recipe "nodejs::npm"
-    #chef.add_recipe "meteor"
+    chef.add_recipe "meteor_windows"
 
-    #chef.json = {
-    #  "meteor" => {
-    #    "install_url" => "https://install.meteor.com",
-    #    "install_mongodb" => true,
-    #    "install_meteorite" => true,
-    #    "create_meteor_user" => true
-    #  }
-    #}
+    chef.json = {
+      :nodejs => {
+        :install_method => "package"
+      },
+      :meteor_windows => {
+        :apps => [
+          "mymeteorapp"
+        ]
+      }
+    }
   end
 end

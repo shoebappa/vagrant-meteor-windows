@@ -49,7 +49,7 @@ cd C:\vagrant
 git clone git://github.com/shoebappa/vagrant-meteor-windows.git meteor
 ```
 
-### Optionaly Configure Vagrant
+### Optionally Configure Vagrant
 
 The `C:\vagrant\meteor\Vagrantfile` holds some configuration options for the provisioning.  You will likely want a different name for you first meteor app than `mymeteorapp` so you will edit the following in the Vagrantfile:
 

@@ -132,7 +132,7 @@ Revision Control should work from the Windows side or the Linux side.  There is 
 
 ### Backup
 
-I would strongly recommend backing up the applcations and databases from within the VM.  There are directions below on how you could connect to the VM with a tool such as WinSCP.
+I would strongly recommend backing up the applications and databases from within the VM.  There are directions below on how you could connect to the VM with a tool such as SFTP Net Drive or WinSCP.
 
 ### Migrating Applications
 
@@ -142,7 +142,7 @@ The symlink complexity of this implementation complicates migrating an existing 
 
 ### Vagrant Chef Configuration Attributes
 
-These are configuration options that would go in the `:meteor_windows => {}` section on the `chaf.json` settings of the `Vagrantfile`
+These are configuration options that would go in the `:meteor_windows => {}` section on the `chef.json` settings of the `Vagrantfile`
 
 #### Meteor Apps Config (Default: mymeteorapp)
 
@@ -195,8 +195,3 @@ If you would like to utilize special tools to connect to the VM such as Putty, o
 Download Putty and PuttyGen from http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html to SSH into the VM and to convert the Vagrant SSH Key to a Putty style ppk that can be used by Putty, WinSCP.  Once you have puttygen, load the Vagrant key found under `C:\Users\[Your Username]\.vagrant.d\insecure_private_key`, then save it back out to a ppk file (I didn't use a password for the key, but perhaps there is a reason to).
 
 Open Putty, use IP `10.11.12.13` and port `22`, Click "Connection > Data" in the tree and put Auto-login username "vagrant", then go to "SSH > Auth" and Browse in the "Private key file" to the ppk you generated with Puttygen.  Now Go back to the main screen by clicking "Session" in the Tree, and type a relevant name in the "Saved Sessions" such as "Vagrant Meteor" and click save.  This will save the IP Address, Login Name and Key location for the next time you run Putty and you can just click the saved session.  Running this should give you a SSH Terminal to the Vagrant virtualized Linux box.
-
-
-## Known Issues
-
-I haven't been able to get meteorite to exit cleanly in this setup.  Running meteor directly, even with the symlinks, seems to work great, but for whatever reason meteorite fails to cleanup.  I've only been able to run a `killall node && killall mongod` to clean up.

@@ -23,6 +23,9 @@ end
 Chef::Log.info("Install Meteorite: #{node['meteor_windows']['install_meteorite']}")
 Chef::Log.info("Meteor Command: #{node['meteor_windows']['meteor_command']}")
 
+#Chef::Log.info("Env: #{node['meteor_windows']['env']}")
+Chef::Log.info("Config: #{node['meteor_windows']['config']}")
+
 if node['meteor_windows']['install_meteorite']
   bash "install_meteorite" do
     cwd Chef::Config[:file_cache_path]
@@ -102,4 +105,18 @@ apps.each do |app|
   #    })
   #  end
   #end
+end
+
+# Install ACPI Support Package and Power Button
+if node['meteor_windows']['install_acpipowerbutton']
+
+  package "acpi-support" do
+    action :install
+  end
+
+  template "#{node['meteor_windows']['sync_directory']}/acpipowerbutton.cmd" do
+    source "acpi.cmd.erb"
+    owner node['meteor_windows']['owner']
+    group node['meteor_windows']['group']
+  end
 end

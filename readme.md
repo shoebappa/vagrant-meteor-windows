@@ -20,6 +20,8 @@ You need to have Git's cmd AND bin folders in the Windows `Path` environment var
 
 http://git-scm.com/
 
+Optionally: If you are concerned about modifying the Windows Path for Git SSH and all the other apps included there, I've found that Git Shell from GitHub for Windows http://windows.github.com/ will work intead of installing the Git client by using Git Shell in place of the sections below that say a "Windows Command Prompt".  Git Shell seems to configure a Power Shell with the appropriate tools for Git and SSH.  This also has the added benefit of the colors in the terminal.
+
 ### Download and Install VirtualBox
 
 https://www.virtualbox.org/wiki/Downloads

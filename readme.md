@@ -8,7 +8,7 @@ The instructions below will have you download and install a Virtualization tool 
 
 *This version has been drastically modified from earliest version.  If you used versions without the Symlinks, I would recommend using these in a new Vagrant evnironment and migrate any apps over to the new version.*
 
-Many thanks to @gabrielhpugliese who provided the steps to `mount --bind` the database directories for the apps as symlinks to another area of the VM (Source: http://goo.gl/clpKa).  This helped streamline this process and allows for the utilization of the Synced Folders provided by Vagrant which allows for the use of pretty much any development tools of you pleasing to code applications locally from the Windows host machine.  The issue that this resolved is that without the symlink, MongoDB can't operate in the synced folder on Windows.  Normal symlinks also won't work, so using `mount --bind` was a great find.
+Many thanks to [Gabriel Pugliese](https://github.com/gabrielhpugliese) who provided the steps to `mount --bind` the database directories for the apps as symlinks to another area of the VM (Source: http://goo.gl/clpKa).  This helped streamline this process and allows for the utilization of the Synced Folders provided by Vagrant which allows for the use of pretty much any development tools of you pleasing to code applications locally from the Windows host machine.  The issue that this resolved is that without the symlink, MongoDB can't operate in the synced folder on Windows.  Normal symlinks also won't work, so using `mount --bind` was a great find.
 
 ## Prerequisites
 

@@ -161,7 +161,7 @@ The `apps` attribute is a string array that will provision each as a mrt or mete
 
 #### Customized Vagrantfile
 
-The below would create apps mymeteorapp and mymeteorapp2 using meteor create instead of mrt create under the /vagrant/apps... directory with a database symlinks under /home/vagrant/apps/... and skip the meteorite install and note create the vagrant ssh cmd helper files.
+The below would create apps mymeteorapp and mymeteorapp2 using meteor create instead of mrt create under the /vagrant/apps... directory with a database symlinks under /home/vagrant/apps/... and skip the meteorite install and enabling ACPI support (see below)
 
 Look at the `repo\cookbooks\attributes\default.rb` to see the configurable options.
 
@@ -176,13 +176,19 @@ chef.json = {
       "mymeteorapp2"
     ],
     :install_meteorite => false,
+    :install_acpipowerbutton => true,
     :meteor_command => "meteor",
-    :create_cmd_files => false,
     :sync_directory => "/vagrant/apps",
     :home_directory => "/home/vagrant/apps"
   }
 }
 ```
+
+#### ACPI Support
+
+It was recommended on the meteor group that `vagrant halt` while claiming to gracefully shut down, might not.  In the VitrualBox guidance, it was recommended to gracefully shutdown the machine just as you would a real machine through SSH.  If you want to enable ACPI support in the VM and add a helper that will send the `VBoxManage acpipowerbutton` command to the right Vagrant Box, use the `:install_acpipowerbutton` chef.json attribute in the Vagrantfile.  The `acpipowerbutton.cmd` helper script will also be installed in your vagrant synced folder along with the `acpi-support` package on the VM.
+
+To use from a Windows Command Prompt in the `C:\vagrant\meteor\` folder run the command `acpipowerbutton`.  Optionally if using Git Shell from the same folder run `./acpipowerbutton`
 
 ### Alternate ways of connecting to the VM and transferring files
 

@@ -4,6 +4,10 @@ These are the steps I use to run meteor on windows by provisioning a virtualized
 
 The instructions below will have you download and install a Virtualization tool (Virtual Box), VM Provisioner (Vagrant), which will download a Linux OS for you (280MB), and download several Chef cookbooks (scripts) to run on the provisioned VM to install the server software needed to run Meteor.  These are pretty amazing tools for setting up repeatable development environments/sandboxes for teams or personal use.  Some of the tools (Chef, Berkshelf) also translate well into production devops provisioning, but it may be a bit overkill for just getting meteor running on Windows.
 
+## Changelog
+
+6/23/2013 - Added support for Meteorites new symlinks.  This will mount --bind each apps packages directory.
+
 ## Update
 
 *This version has been drastically modified from earliest version.  If you used versions without the Symlinks, I would recommend using these in a new Vagrant evnironment and migrate any apps over to the new version.*

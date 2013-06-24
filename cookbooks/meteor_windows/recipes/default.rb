@@ -76,7 +76,7 @@ apps.each do |app|
     not_if { ::File.exists?("#{Chef::Config[:file_cache_path]}/meteor_#{app}_created_by_chef") }
   end
 
-  # Re-Create the moeve .meteor directory in order to map the symlink
+  # Re-Create the .meteor directory in order to map the symlink
   directory "#{node['meteor_windows']['sync_directory']}/#{app}/.meteor" do
     action :create
     recursive true
@@ -91,6 +91,32 @@ apps.each do |app|
     fstype "none"
     options "bind,rw"
     action [:mount]
+  end
+
+  if node['meteor_windows']['install_meteorite']
+    # Create the meteorite packages directories in order to map the symlink
+    directory "#{node['meteor_windows']['sync_directory']}/#{app}/packages" do
+      action :create
+      recursive true
+      owner node['meteor_windows']['owner']
+      group node['meteor_windows']['group']
+    end
+
+    directory "#{node['meteor_windows']['home_directory']}/#{app}/packages" do
+      action :create
+      recursive true
+      owner node['meteor_windows']['owner']
+      group node['meteor_windows']['group']
+    end    
+
+    # Create a mount symlink from the sync directory to the home directory
+    # This is required to allow meteorite to create its own symlinks
+    mount "#{node['meteor_windows']['sync_directory']}/#{app}/packages" do
+      device "#{node['meteor_windows']['home_directory']}/#{app}/packages"
+      fstype "none"
+      options "bind,rw"
+      action [:mount]
+    end  
   end
 
   # This worked really well to start meteorite or meteor and add packages, but I couldn't get it to send a SIGINT (ctrl + c) to the process on the VM rather than try to stop vagrant ssh

@@ -24,7 +24,8 @@ Vagrant.configure("2") do |config|
 
     chef.json = {
       :nodejs => {
-        :install_method => "package"
+        :install_method => "package",
+        :npm => "1.3.4"
       },
       :meteor_windows => {
         :apps => [

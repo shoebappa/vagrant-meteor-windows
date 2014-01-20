@@ -6,6 +6,10 @@ The instructions below will have you download and install a Virtualization tool 
 
 ## Changelog
 
+1/19/2014 - Updated with new require_plugin directives.  Added omnibus and vbguest plugins, which should allow this to work with more bas boxes that might not have the VMWare tools and Chef already installed.
+
+With Vagrant 1.3.1 I think they decided that running the provisioner on every run is no longer desired.  Since I was relying on the provisioner to mount the symlinks, you must now run `vagrant up --provision` see: https://github.com/mitchellh/vagrant/issues/2421 for details of the change on the Vagrant side.
+
 6/23/2013 - Added support for Meteorites new symlinks.  This will mount --bind each apps packages directory.
 
 ## Update
@@ -36,12 +40,16 @@ The provided Vagrantfile is made for Vagrant >= 1.1
 
 http://downloads.vagrantup.com/
 
-### Install Berkshelf Vagrant Plugin
+### Install Vagrant Plugins
 
-Berkshelf http://berkshelf.com/ is awesome, and makes the Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  From a command prompt run:
+Vagrant base boxes will typically have Chef and Virtual Box guest tools installed, but to expand the number of boxes, and also ensure that the latest version of chef is installed, vagrant-vbguest and vagrant-omnibus (chef) plugins are used and mus be installed.
+
+Berkshelf http://berkshelf.com/ makes Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  To utilize in Vagrant, we must install its plugin.  From a command prompt run:
 
 ```
 vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-omnibus
 ```
 
 ## Provisioning
@@ -86,7 +94,7 @@ From the Windows Command Prompt:
 
 ```
 cd C:\vagrant\meteor
-vagrant up
+vagrant up --provision
 ```
 This will download a virtualbox image (~280MB), and then run the Chef provisioning cookbook and configures a private network IP: 10.11.12.13.  I find the private network easier to work with than Vagrant Port Forwarding.
 

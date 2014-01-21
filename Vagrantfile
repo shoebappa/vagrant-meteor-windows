@@ -7,11 +7,11 @@ Vagrant.require_plugin "vagrant-berkshelf"
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "opscode32"
 
-  # This Opscode box is used because the default Vagrant boxes come with an older version of chef, which the nodejs package option don't work with.
-  # To use another box, you will need to remove the nodejs install_method from the chef.json which will use the default method of source, which takes a while
-  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_chef-11.4.4.box"
+  # The vbguest and omnibus plugins should make other boxes possible.
+  config.vm.box = "saucy64"
+
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
 
   config.vm.network  :private_network, ip: "10.11.12.13"
 

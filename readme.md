@@ -6,9 +6,11 @@ The instructions below will have you download and install a Virtualization tool 
 
 ## Changelog
 
-1/19/2014 - Updated with new require_plugin directives.  Added omnibus and vbguest plugins, which should allow this to work with more bas boxes that might not have the VMWare tools and Chef already installed.
+1/19/2014 - Updated with new require_plugin directives.  Added omnibus and vbguest plugins, which should allow this to work with more base boxes that might not have the VMWare tools and Chef already installed.
 
-With Vagrant 1.3.1 I think they decided that running the provisioner on every run is no longer desired.  Since I was relying on the provisioner to mount the symlinks, you must now run `vagrant up --provision` see: https://github.com/mitchellh/vagrant/issues/2421 for details of the change on the Vagrant side.
+At some point Vagrant decided that running the provisioner on every `up` was no longer desired.  Since I was relying on the provisioner to mount the symlinks, you must now run `vagrant up --provision` see: https://github.com/mitchellh/vagrant/issues/2421 for details of the change on the Vagrant side.
+
+With this change I also updated to a new base box running ubuntu 13.10.  I would assume this would need app migration, so if that's a problem, I wouldn't update vagrant / these scripts.  Feel free to try the new plugins with the old Ubuntu version, but I couldn't get it to work.
 
 6/23/2013 - Added support for Meteorites new symlinks.  This will mount --bind each apps packages directory.
 

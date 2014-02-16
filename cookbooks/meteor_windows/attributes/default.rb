@@ -8,5 +8,6 @@ end
 default['meteor_windows']['install_acpipowerbutton'] = false
 default['meteor_windows']['sync_directory'] = '/vagrant'
 default['meteor_windows']['home_directory'] = '/home/vagrant'
+default['meteor_windows']['mount_directory'] = '.meteor/local'
 default['meteor_windows']['owner'] = 'vagrant'
 default['meteor_windows']['group'] = 'vagrant'

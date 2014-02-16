@@ -58,7 +58,7 @@ apps.each do |app|
   Chef::Log.info("Creating Meteor App: #{app}")
 
   # Create Destination folder for the database symlink mount of the created app
-  directory "#{node['meteor_windows']['home_directory']}/#{app}/.meteor/local" do
+  directory "#{node['meteor_windows']['home_directory']}/#{app}/#{node['meteor_windows']['mount_directory']}" do
     action :create
     recursive true
     owner node['meteor_windows']['owner']
@@ -70,14 +70,14 @@ apps.each do |app|
     cwd node['meteor_windows']['sync_directory']
     code <<-EOF
     #{node['meteor_windows']['meteor_command']} create #{app}
-    mv #{node['meteor_windows']['sync_directory']}/#{app}/.meteor/local #{node['meteor_windows']['home_directory']}/#{app}/.meteor/local
+    mv #{node['meteor_windows']['sync_directory']}/#{app}/#{node['meteor_windows']['mount_directory']} #{node['meteor_windows']['home_directory']}/#{app}/#{node['meteor_windows']['mount_directory']}
     touch #{Chef::Config[:file_cache_path]}/meteor_#{app}_created_by_chef
     EOF
     not_if { ::File.exists?("#{Chef::Config[:file_cache_path]}/meteor_#{app}_created_by_chef") }
   end
 
   # Re-Create the .meteor/local directory in order to map the symlink
-  directory "#{node['meteor_windows']['sync_directory']}/#{app}/.meteor/local" do
+  directory "#{node['meteor_windows']['sync_directory']}/#{app}/#{node['meteor_windows']['mount_directory']}" do
     action :create
     recursive true
     owner node['meteor_windows']['owner']
@@ -86,8 +86,8 @@ apps.each do |app|
 
   # Create a mount symlink from the sync directory to the home directory
   # This is required to move the Mongo DB location to a non-synced folder
-  mount "#{node['meteor_windows']['sync_directory']}/#{app}/.meteor/local" do
-    device "#{node['meteor_windows']['home_directory']}/#{app}/.meteor/local"
+  mount "#{node['meteor_windows']['sync_directory']}/#{app}/#{node['meteor_windows']['mount_directory']}" do
+    device "#{node['meteor_windows']['home_directory']}/#{app}/#{node['meteor_windows']['mount_directory']}"
     fstype "none"
     options "bind,rw"
     action [:mount]

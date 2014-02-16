@@ -6,6 +6,8 @@ The instructions below will have you download and install a Virtualization tool 
 
 ## Changelog
 
+2/16/2014 - Changed the symlinked directory from {app}/.meteor to {app}/.meteor/local to help with version control.  Thanks @mmucklo for the pull request.  Made configurable with `:meteor_windows => :mount_directory`.  This change may break existing apps, so you could set that back to `.meteor`.
+
 1/19/2014 - Updated with new require_plugin directives.  Added omnibus and vbguest plugins, which should allow this to work with more base boxes that might not have the VMWare tools and Chef already installed.
 
 At some point Vagrant decided that running the provisioner on every `up` was no longer desired.  Since I was relying on the provisioner to mount the symlinks, you must now run `vagrant up --provision` see: https://github.com/mitchellh/vagrant/issues/2421 for details of the change on the Vagrant side.
@@ -193,7 +195,8 @@ chef.json = {
     :install_acpipowerbutton => true,
     :meteor_command => "meteor",
     :sync_directory => "/vagrant/apps",
-    :home_directory => "/home/vagrant/apps"
+    :home_directory => "/home/vagrant/apps",
+    :mount_directory => ".meteor"
   }
 }
 ```

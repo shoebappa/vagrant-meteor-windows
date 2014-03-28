@@ -40,7 +40,7 @@ https://www.virtualbox.org/wiki/Downloads
 
 ### Download and Install Vagrant
 
-The provided Vagrantfile is made for Vagrant >= 1.1
+The provided Vagrantfile is made for Vagrant >= 1.1 && Vagrant < 1.5 (Plugin vagrant-berkshelf is not yet compatible with Vagrant 1.5)
 
 http://downloads.vagrantup.com/
 

@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_plugin "vagrant-vbguest"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-berkshelf"
+require "vagrant-vbguest"
+require "vagrant-omnibus"
+require "vagrant-berkshelf"
 
 Vagrant.configure("2") do |config|
 

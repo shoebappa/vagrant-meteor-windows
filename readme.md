@@ -42,7 +42,7 @@ https://www.virtualbox.org/wiki/Downloads
 
 The provided Vagrantfile is made for Vagrant >= 1.1 && Vagrant < 1.5 (Plugin vagrant-berkshelf is not yet compatible with Vagrant 1.5)
 
-http://downloads.vagrantup.com/
+http://www.vagrantup.com/download-archive/v1.4.3.html
 
 ### Install Vagrant Plugins
 

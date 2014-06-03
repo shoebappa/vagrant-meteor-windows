@@ -6,6 +6,8 @@ The instructions below will have you download and install a Virtualization tool 
 
 ## Changelog
 
+6/2/2014 - After a few months of not supporting the latest vagrant due to some changes and uncertainty with the vagrant-berkshelf plugin.  It seems at least for now I've gotten this working with the Latest Vagrant, Virtual Box, and Vagrant Berkshelf Plugin.  Note that the --provision is no longer require because of the `run: "always"` support.
+
 2/16/2014 - Changed the symlinked directory from {app}/.meteor to {app}/.meteor/local to help with version control.  Thanks @mmucklo for the pull request.  Made configurable with `:meteor_windows => :mount_directory`.  This change may break existing apps, so you could set that back to `.meteor`.
 
 1/19/2014 - Updated with new require_plugin directives.  Added omnibus and vbguest plugins, which should allow this to work with more base boxes that might not have the VMWare tools and Chef already installed.
@@ -36,11 +38,13 @@ Optionally: If you are concerned about modifying the Windows Path for Git SSH an
 
 ### Download and Install VirtualBox
 
+I ran into issues with VBox < 4.3.12
+
 https://www.virtualbox.org/wiki/Downloads
 
 ### Download and Install Vagrant
 
-The provided Vagrantfile is made for Vagrant >= 1.1 && Vagrant < 1.5 (Plugin vagrant-berkshelf is not yet compatible with Vagrant 1.5)
+The provided Vagrantfile is made for Vagrant >= 1.6.3
 
 http://downloads.vagrantup.com/
 
@@ -51,10 +55,12 @@ Vagrant base boxes will typically have Chef and Virtual Box guest tools installe
 Berkshelf http://berkshelf.com/ makes Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  To utilize in Vagrant, we must install its plugin.  From a command prompt run:
 
 ```
-vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-berkshelf --plugin-version ">= 2.0.1"
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-omnibus
 ```
+
+*Note:* I had some trouble installing the newest vagrant-berkshelf plugin.  Git appearently has a non-functioning tar executable.  I had to download GNU Tar from: http://gnuwin32.sourceforge.net/packages/gtar.htm and add `C:\Program Files (x86)\GnuWin32\bin` to my PATH before where Git was.
 
 ## Provisioning
 
@@ -98,7 +104,7 @@ From the Windows Command Prompt:
 
 ```
 cd C:\vagrant\meteor
-vagrant up --provision
+vagrant up
 ```
 This will download a virtualbox image (~280MB), and then run the Chef provisioning cookbook and configures a private network IP: 10.11.12.13.  I find the private network easier to work with than Vagrant Port Forwarding.
 

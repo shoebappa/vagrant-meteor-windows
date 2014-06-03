@@ -1,10 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_plugin "vagrant-vbguest"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-berkshelf"
-
 Vagrant.configure("2") do |config|
 
 
@@ -24,7 +20,9 @@ Vagrant.configure("2") do |config|
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
   end
 
-  config.vm.provision :chef_solo do |chef|
+  config.vm.provision "chef_solo", run: "always" do |chef|
+
+    #chef.log_level = :debug
 
     chef.add_recipe "meteor_windows"
 

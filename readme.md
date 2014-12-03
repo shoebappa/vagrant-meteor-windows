@@ -46,7 +46,7 @@ https://www.virtualbox.org/wiki/Downloads
 
 The provided Vagrantfile is made for Vagrant >= 1.6.3
 
-http://downloads.vagrantup.com/
+http://www.vagrantup.com/downloads.html
 
 ### Install Vagrant Plugins
 

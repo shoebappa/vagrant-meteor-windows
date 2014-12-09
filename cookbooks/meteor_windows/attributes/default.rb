@@ -1,4 +1,4 @@
-default['meteor_windows']['install_meteorite'] = true
+default['meteor_windows']['install_meteorite'] = false
 if !node['meteor_windows']['install_meteorite']
   default['meteor_windows']['meteor_command'] = 'meteor'
 else

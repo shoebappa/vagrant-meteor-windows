@@ -5,9 +5,9 @@ Vagrant.configure("2") do |config|
 
 
   # The vbguest and omnibus plugins should make other boxes possible.
-  config.vm.box = "saucy64"
+  config.vm.box = "trusty64"
 
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
   config.vm.network  :private_network, ip: "10.11.12.13"
 
@@ -28,8 +28,7 @@ Vagrant.configure("2") do |config|
 
     chef.json = {
       :nodejs => {
-        :install_method => "package",
-        :npm => "1.3.23"
+        :install_method => "package"
       },
       :meteor_windows => {
         :apps => [

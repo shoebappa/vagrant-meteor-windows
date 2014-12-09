@@ -6,6 +6,8 @@ The instructions below will have you download and install a Virtualization tool 
 
 ## Changelog
 
+12/8/2014 - Update for Meteor 1.0.0, Vagrant 1.6.5, and Trusty64.  `mrt` support changed from the default to just run the `meteor` command.  Also confirmed same setup works on OS X.
+
 6/2/2014 - After a few months of not supporting the latest vagrant due to some changes and uncertainty with the vagrant-berkshelf plugin.  It seems at least for now I've gotten this working with the Latest Vagrant, Virtual Box, and Vagrant Berkshelf Plugin.  Note that the --provision is no longer require because of the `run: "always"` support.
 
 2/16/2014 - Changed the symlinked directory from {app}/.meteor to {app}/.meteor/local to help with version control.  Thanks @mmucklo for the pull request.  Made configurable with `:meteor_windows => :mount_directory`.  This change may break existing apps, so you could set that back to `.meteor`.
@@ -55,7 +57,7 @@ Vagrant base boxes will typically have Chef and Virtual Box guest tools installe
 Berkshelf http://berkshelf.com/ makes Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  To utilize in Vagrant, we must install its plugin.  From a command prompt run:
 
 ```
-vagrant plugin install vagrant-berkshelf --plugin-version ">= 2.0.1"
+vagrant plugin install vagrant-berkshelf
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-omnibus
 ```
@@ -96,7 +98,7 @@ This is an array so you could include as many meteor apps as you want, and this 
 }
 ```
 
-The Chef cookbook included in this repository not only runs a `mrt create mymeteorapp` or `meteor create mymeteorapp` but also needs to create a symlink for the database (MongoDB won't work in a Vagrant synced folder and neither will normal symlinks, so the Chef mount provisioner is used to create the symlink).  You're welcome to handle this complication and meteor app creation differently by leaving this array empty, but it's there is you want it.
+The Chef cookbook included in this repository not only runs a `meteor create mymeteorapp` but also needs to create a symlink for the database (MongoDB won't work in a Vagrant synced folder and neither will normal symlinks, so the Chef mount provisioner is used to create the symlink).  You're welcome to handle this complication and meteor app creation differently by leaving this array empty, but it's there is you want it.
 
 ### Provision the VM
 
@@ -123,7 +125,7 @@ Then from the Vagrant SSH prompt:
 
 ```
 cd /vagrant/mymeteorapp
-mrt run
+meteor run
 ```
 
 Your meteor app should be running and viewable from your Windows host box in a browser by loading `http://10.11.12.13:3000/`
@@ -170,7 +172,7 @@ These are configuration options that would go in the `:meteor_windows => {}` sec
 
 #### Meteor Apps Config (Default: mymeteorapp)
 
-The `apps` attribute is a string array that will provision each as a mrt or meteor application and create the appropriate symlinks.
+The `apps` attribute is a string array that will provision each as a meteor application and create the appropriate symlinks.
 
 ```
 :meteor_windows => {
@@ -183,7 +185,7 @@ The `apps` attribute is a string array that will provision each as a mrt or mete
 
 #### Customized Vagrantfile
 
-The below would create apps mymeteorapp and mymeteorapp2 using meteor create instead of mrt create under the /vagrant/apps... directory with a database symlinks under /home/vagrant/apps/... and skip the meteorite install and enabling ACPI support (see below)
+The below would create apps mymeteorapp and mymeteorapp2 using meteor create instead of mrt create (this is now the default, would need to flip back if for some reason you still wanted mrt) under the /vagrant/apps... directory with a database symlinks under /home/vagrant/apps/... and skip the meteorite install and enabling ACPI support (see below)
 
 Look at the `repo\cookbooks\attributes\default.rb` to see the configurable options.
 

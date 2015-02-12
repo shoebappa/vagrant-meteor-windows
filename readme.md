@@ -52,7 +52,7 @@ http://www.vagrantup.com/downloads.html
 
 ### Install Vagrant Plugins
 
-Vagrant base boxes will typically have Chef and Virtual Box guest tools installed, but to expand the number of boxes, and also ensure that the latest version of chef is installed, vagrant-vbguest and vagrant-omnibus (chef) plugins are used and mus be installed.
+Vagrant base boxes will typically have Chef and Virtual Box guest tools installed, but to expand the number of boxes, and also ensure that the latest version of chef is installed, vagrant-vbguest and vagrant-omnibus (chef) plugins are used and must be installed.
 
 Berkshelf http://berkshelf.com/ makes Chef provisioning in Vagrant and elsewhere a breeze by downloading the dependent cookbooks.  To utilize in Vagrant, we must install its plugin.  From a command prompt run:
 
